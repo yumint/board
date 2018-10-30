@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="post">
+ 
+  	<!-- 게시판 리스트 -->
+  	<select id="boardPageList" parameterType="pageVo" resultType="pageVo">
+		SELECT *
+		  FROM
+				(SELECT ROWNUM AS rnum , A.* 
+				    FROM 
+				        ( SELECT post.*
+				            FROM post
+				           where board_id = #{board_id}
+				        ORDER BY board_id)A)
+		 WHERE  rnum BETWEEN #{page}*#{pageSize}-(#{pageSize}-1) AND #{page}*#{pageSize}
+	</select>
+	
+	<!-- 게시글 총갯수 -->
+	<select id="getBoardCnt" parameterType="String"  resultType="int">
+		select count(*) from post
+		where board_id = #{board_id}
+  	</select>
+  	
+  	<!-- 게시글 등록 -->
+  	<insert id="postInsert" parameterType="postVo">
+	  	insert into post(post_no , board_id , title , cnt , c_date ,d_yn, parent_no , userid) 
+		values (nvl((select max(post_no +1) from post),1), #{board_id} , #{title} , #{cnt} ,sysdate ,#{d_yn},'', #{userid})
+  	</insert>
+  	
+  	<!--  게시글 상세보기 화면 -->
+  	<select id="boardDetail" parameterType="String" resultType="postVo">
+  		select * from post where post_no = #{post_no}
+  	</select>
+  	
+  	<!-- 게시글 수정하는 화면 -->
+  	<update id="boardUpdate" parameterType="postVo">
+  		update post
+		   set title=#{title}
+		     , cnt=#{cnt}
+		 where POST_NO = #{post_no}
+  	</update>
+ 
+ </mapper>

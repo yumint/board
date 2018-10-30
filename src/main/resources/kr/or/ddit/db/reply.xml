@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="reply">
+ 
+ 	<!-- 해당 게시글의 댓글 조회 -->
+	<select id="postReply" parameterType="String" resultType="replyVo">
+		SELECT ROWNUM, a.* FROM (select /*+  INDEX (reply IDX_REPLY_01) */ *from reply where post_no = #{post_no} order by COMMENT_ID desc ) a
+	</select>
+	
+	<update id="postReplyWrite" parameterType="replyVo">
+		INSERT INTO reply(COMMENT_ID , POST_NO , COMMENT_CNT , C_USERID , C_DATE) 
+		VALUES (nvl((select max(comment_id +1) from reply),1) , #{post_no} , #{comment_cnt} , #{c_userid}, to_char(sysdate))
+	
+	</update>
+ 
+  </mapper>
