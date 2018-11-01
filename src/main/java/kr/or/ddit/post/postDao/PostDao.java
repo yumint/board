@@ -160,5 +160,28 @@ public class PostDao implements PostDaoInf {
 		return replyInsert;
 	}
 
+	/**  * Method   : postDelete
+	  * 작성자 : PC 
+	  * 변경이력 :  
+	  * @param post_no
+	  * @return
+	  * Method 설명 : 게시글 삭제하는 부분 
+	*/
+	@Override
+	public int postDelete(String post_no) {
+		
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int postDelete = session.update("post.postDelete" , post_no);
+		
+		// 추가해주는 것이기 때문에 커밋까지 완료해야 한다
+		session.commit();
+		session.close();
+		
+		return postDelete;
+		
+	}
+
 
 }

@@ -64,6 +64,16 @@ public interface PostServiceInf {
 	  * Method 설명 : 댓글입력하면 추가해주는 부분
 	*/
 	int postReplyWrite(ReplyVo replyVo);
+	
+	
+	/**  * Method   : postDelete
+	  * 작성자 : PC 
+	  * 변경이력 :  
+	  * @param post_no
+	  * @return
+	  * Method 설명 : 게시글 삭제하는 부분 
+	*/
+	int postDelete(String post_no);
 
 	
 

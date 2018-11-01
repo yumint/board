@@ -56,9 +56,19 @@
   							<c:forEach items="${pageList }" var="vo">
  								<tr class="userClick">
   									<td class="list"><a href="/postDetail?post_no=${vo.post_no}">${vo.rnum}</a></td> 
-  									<td><a href="/postDetail?post_no=${vo.post_no}">${vo.title}</a></td>
-  									<td class="list"><a href="/postDetail?post_no=${vo.post_no}">${vo.userid}</a></td>
-  									<td class="list"><a href="/postDetail?post_no=${vo.post_no}"><fmt:formatDate value="${vo.c_date }" pattern="yyyy-MM-dd"></fmt:formatDate></a></td>
+  									
+  									<c:choose>
+  										<c:when test="${vo.d_yn == 'Y'}">
+  											<td>삭제된 게시글입니다</td>
+  											<td class="list">${vo.userid}</td>
+  											<td class="list"><fmt:formatDate value="${vo.c_date }" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+  										</c:when>
+  										<c:otherwise>
+  											<td><a href="/postDetail?post_no=${vo.post_no}">${vo.title}</a></td>
+  											<td class="list"><a href="/postDetail?post_no=${vo.post_no}">${vo.userid}</a></td>
+  											<td class="list"><a href="/postDetail?post_no=${vo.post_no}"><fmt:formatDate value="${vo.c_date }" pattern="yyyy-MM-dd"></fmt:formatDate></a></td>
+  										</c:otherwise>
+  									</c:choose>
   								</tr> 
   						
   							</c:forEach>

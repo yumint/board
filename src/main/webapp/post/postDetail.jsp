@@ -155,7 +155,7 @@
 		<c:choose>
 			<c:when test="${postVo.userid == user.userId}">
 				<input id="updateButton" type="button"  value="수정" onClick="location.href='/postUpdate?post_no=${postVo.post_no}'"/>
-				<input id="deleteButton" type="button"  value="삭제" />
+				<input id="deleteButton" type="button"  value="삭제" onClick="location.href='/postDelete?page=1&pageSize=10&board_id=${postVo.board_id}&post_no=${postVo.post_no}'"/>
 				<input id="listButton" type="button"  value="목록" onClick="location.href='/postList?page=1&pageSize=10&board_id=${postVo.board_id}'"/>
 			</c:when>
 			<c:otherwise>

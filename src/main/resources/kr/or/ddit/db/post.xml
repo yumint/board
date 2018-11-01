@@ -41,5 +41,12 @@
 		     , cnt=#{cnt}
 		 where POST_NO = #{post_no}
   	</update>
+  	
+  	<!-- 게시글 삭제하는 화면 -->
+  	<update id="postDelete" parameterType="String">
+	  	update post
+		set d_yn = 'Y'
+		where post_no = #{post_no}
+  	</update>
  
  </mapper>

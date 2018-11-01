@@ -115,6 +115,19 @@ public class PostService implements PostServiceInf {
 	public int postReplyWrite(ReplyVo replyVo) {
 		return postDao.postReplyWrite(replyVo);
 	}
+
+
+	/**  * Method   : postDelete
+	  * 작성자 : PC 
+	  * 변경이력 :  
+	  * @param post_no
+	  * @return
+	  * Method 설명 : 게시글 삭제하는 부분 
+	*/
+	@Override
+	public int postDelete(String post_no) {
+		return postDao.postDelete(post_no);
+	}
 	
 	
 	

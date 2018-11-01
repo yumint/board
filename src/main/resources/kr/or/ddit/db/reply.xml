@@ -6,7 +6,7 @@
  
  	<!-- 해당 게시글의 댓글 조회 -->
 	<select id="postReply" parameterType="String" resultType="replyVo">
-		SELECT ROWNUM, a.* FROM (select /*+  INDEX (reply IDX_REPLY_01) */ *from reply where post_no = #{post_no} order by COMMENT_ID desc ) a
+		SELECT ROWNUM, a.* FROM (select /*+  INDEX (reply IDX_REPLY_01) */ *from reply where post_no = #{post_no} order by COMMENT_ID asc ) a
 	</select>
 	
 	<update id="postReplyWrite" parameterType="replyVo">
